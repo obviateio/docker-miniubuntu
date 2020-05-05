@@ -1,17 +1,14 @@
 #!/bin/bash
-USERNAME="shakataganai"
+DEFAULT="miniubuntu"
 TODAY=`date +%Y%m%d`
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd $DIR
-NAME="$(cut -d- -f2- <<< ${PWD##*/})"
 
-if [ -z "$TRAVIS" ]; then    
-    echo "LOCAL Build -- $NAME:latest"
-    docker build . -t $USERNAME/$NAME:latest
+if [ -z "$1" ]; then
+    echo "LOCAL Build -- $DEFAULT:latest"
+    docker build . -t $DEFAULT:latest
 else
-    echo "CI/CD Build -- $NAME:$TODAY"
-    docker build . --no-cache=true -t $USERNAME/$NAME:$TODAY
-    docker tag $USERNAME/$NAME:$TODAY  $USERNAME/$NAME:latest
-    docker push $USERNAME/$NAME:$TODAY
-    docker push $USERNAME/$NAME:latest
+    echo "CI/CD Build -- $1:$TODAY"
+    docker build . --no-cache=true -t $1:$TODAY
+    docker tag $1:$TODAY  $1:latest
+    docker push $1:$TODAY
+    docker push $1:latest
 fi

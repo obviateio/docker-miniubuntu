@@ -1,0 +1,19 @@
+#!/bin/bash -e
+#  Apt installer helper for Docker images
+
+ARGS="$*"
+NO_RECOMMENDS="--no-install-recommends"
+RECOMMENDS="--install-recommends"
+if [[ $ARGS =~ "$RECOMMENDS" ]]; then
+    NO_RECOMMENDS=""
+    ARGS=$(sed "s/$RECOMMENDS//g" <<<"$ARGS")
+fi
+
+echo "Installing $ARGS"
+
+apt-get -qq update && apt-get -qy install $NO_RECOMMENDS $ARGS \
+    && apt-get -qy --purge autoremove \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+    && rm -rf /var/lib/{apt,cache,log}/ \
+    && rm -rf /tmp/* /var/tmp/*
