@@ -9,11 +9,11 @@ env:
   - secure: l0jTtTyX7ZSnDfxXHqmxPf3St3qGPMDpO9CK4vA5BzCFd7uURP9BKya4hOkGp5nBXkPWXQbgHPh6YXd9LEbXOnbImuSwzGZkarRUfo15lxmXGCu4I6AZLkjLqJld8D5FpGoJm74YqpTvxdfcDSaZ44IvwXnX9rWvA2m9g45bKu4fb55BGv+Kb4cxfOT7s+itDCkdjr6IYLRZ3x7L1yJHvIWuCj70Mbq4mbPxS2IbAZRrxlSjlCfvWzMFElGhkqCxyshNTffrpZiQd4LtPsppU+ibEVzzX6v+n/7KXsjgdewcQ2oU3RmOiuO77+a7P/iA76AFQWwfCFKFLOJjZBbgZpJcC94BrDrmPPnGrlPw3peEqk9vkYYb0gWnraOyC90pZ6rl0/WAQ1k05AbhPuix80qce1iX52GOVwwI2o+tqaVVK8YKkBkfKKA/eS89jF65zIsnZWWsO9R4CIVzl/B6MeL44NLwpqv6tFIGSgWDGDVHXtDMzmdEnd9BLfnwYfPthyawpPML3AgdOdG0kkXWFFLpDEFLzq/SrH/V9xOQ0frPlHvhnAWqGy/zHXY/IecL+dEwkG2ugWvtvt75s3scGst14LavwDCUr6fs3EqQdNoW7umXLaDtDeESxyLrYmu2CDHRYtTJTYIKic3ZE638QGSoMeh/leE18kEvdrRKJ3M= # DOCKER_PASSWORD
 
 before_install:
-- docker pull phusion/baseimage:latest
+- docker pull ubuntu:20.04
 - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
 
 script:
-- "./build.sh"
+- "./build.sh shakataganai/miniubuntu"
 
 notifications:
   email: false
